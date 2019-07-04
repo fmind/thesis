@@ -1,0 +1,16 @@
+\begin{table}[!ht]
+    \label{table:introduction:weather}
+    \caption{Permissions requested by the application 'com.tct.weather'}
+    \begin{tabularx}{\textwidth}{|c|X|}
+    \hline
+    Permission & What it allows \\ \hline
+    CHANGE\_WIFI\_STATE & Allows the application to change the state of the wi-fi network. \\ \hline
+    MOUNT\_UNMOUNT\_FILESYSTEMS & Allows mounting and unmounting of file systems (i.e.,\ external SD cards). Android documentation says the permission is NOT intended for third-party applications \\ \hline
+    READ\_PHONE\_STATE & Allows read-only access to phone state, including the phone number of the device, current cellular network information, the status of any ongoing calls, and a list of any PhoneAccounts registered on the device. Documentation says that this permission is DANGEROUS \\ \hline
+        WRITE\_EXTERNAL\_STORAGE & Allows reading and writing of the external storage. This is dangerous (as the application can have access to other user files and third-party logs, system logs). This means that the application can read/write everything it wants and the read data might be sent to the server. \\ \hline
+    ACCESS\_KEYGUARD\_SECURE\_STORAGE & This permission was removed in the OS since 4.4 (KitKat). However, for devices that are below that version, this permission can control a flaw in the OS to lock and unlock the device at any time (like pressing the power button and unlocking the phone) \\ \hline
+    READ\_LOGS & Allows an application to read the low-level system log files. Not for use by third-party applications, because Log entries can contain the user’s private information. \\ \hline
+    SET\_DEBUG\_APP & Configure an application for debugging. Not for use by third-party applications. \\
+    \hline
+    \end{tabularx}
+\end{table}

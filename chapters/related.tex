@@ -1,0 +1,228 @@
+\chapter{State of the art}
+\label{chapter:related}
+
+\begin{quote}
+{\itshape
+This chapter highlights the literature about the creation of malware ground truth.
+
+The first section reviews the approaches developed to detect Android malware from the use of ground truth datasets and machine learning algorithms.
+
+The second section enumerates the datasets currently used by the Android security community and the techniques applied to assist their construction.
+
+The third section references the techniques developed to better understand Android malware with reverse engineering and data mining analysis.
+}
+\end{quote}
+
+\localtableofcontents{}
+
+\section{Detection of Android malware}
+The value of the Android ecosystem depends on the quality of the applications proposed to its users.
+As developers are pushing new applications every day, the task of detecting fraudulent applications continues to be an essential requirement that guarantees the security of application marketplaces.
+
+The research community addressed these concerns by proposing specific approaches to vet the behaviors of Android applications.
+On the one hand, researchers created and adapted dissection techniques to extract valuable information from malware with either static or dynamic analysis.
+On the other hand, the research community developed detection programs to find malicious applications with the help of machine learning algorithms.
+
+The first part of this section reviews the techniques currently used to analyze Android applications.
+
+The second part of this section discusses the statistical models built to detect Android malware.
+\subsection{Malware analysis}
+\subsubsection{Static analysis}
+As the privacy model of Android revolves around user consent, various research groups have studied the use and abuse of system permissions to leak data from Android applications.
+Felt et al.~\cite{felt_android_2011} analyzed the API calls of Android applications to determine if Android developers implement the principle of least privilege.
+Wang et al.~\cite{wang_hey_2012} developed DroidRanger to create a behavioral footprint of Android malware families based on their permissions.
+Barrera et al.~\cite{barrera_methodology_2010} presented a methodology to analyze permission-based models such as Android to suggest security improvements.
+
+Other authors analyzed the byte code of Android applications to create more abstract features.
+Enck et al.~\cite{enck_study_2011} introduced the decompiler ded to reverse the bytecode of Android applications and study the use of Android APIs.
+Bartel et al.~\cite{bartel_dexpler:_2012} created Dexpler that converts Android bytecode into an uncomplicated representation that is more accessible to security analysts.
+Suarez-Tangil et al.~\cite{suarez-tangil_dendroid:_2014} studied the used of text mining techniques adapted from vector space modelization to cluster applications based on their similarity.
+
+Another specificity of Android systems is the reliance on inter-program communication to create services reusable from other applications.
+Octeau et al.~\cite{octeau_effective_2013} proposed Epicc as a sound static analysis technique able to improve the discovery of inter-component communication and detect their exploitation.
+Feng et al.~\cite{feng_apposcopy:_2014} developed Apposcopy to suggest a semantic signature from taint analysis and inter-component call graphs.
+Federrath et al.~\cite{federrath_apkcombiner:_2015} presented a tool called ApkCombiner to reduce the problem of communication between multiple applications as if there were a single application.
+Kutylowski et al.~\cite{kutylowski_droidminer:_2014} developed DroidMiner to mine logic conditions from Android applications and detect potential malware.
+Barrera et al.~\cite{fratantonio_triggerscope:_2016} designed a system called TriggerScope that detects logic bombs that trigger malicious behaviors hidden inside Android applications.
+
+Furthermore, Li et al.~\cite{li_static_2017} performed a systematic literature review on 124 research papers related to the application of static analysis on Android applications.
+\subsubsection{Dynamic analysis}
+To complement information obtained from static analysis, research groups developed dynamic analysis techniques to gather runtime information from the controlled execution of Android applications.
+Rastogi et al.~\cite{rastogi_appsplayground:_2013} created a framework called AppsPlayground to perform various dynamic analysis such as taint tracing, APIS and kernel level monitoring on Android applications.
+Yan et al.~\cite{yan_droidscope:_2012} proposed DroidScope to reconstruct the semantic of Android applications based on the trace left on the hardware, the operating system, and the Android virtual machine.
+Tam et al.~\cite{tam_copperdroid:_2015} presented CopperDroid, a tool that performs dynamic behavior analysis from system calls created by the execution of Android applications.
+Jang et al.~\cite{jang_detecting_2016} introduced Andro-profiler to mine the information contained in system logs and generate human-readable behavior profiles.
+Spreitzer et al.~\cite{spreitzer_procharvester:_2018} developed ProcHarvester to mine the information contained in Linux procfs systems and detect information leaks.
+Rasthofer et al.~\cite{rasthofer_harvesting_2016} released Harvester, an approach that extracts runtime values from highly obfuscated Android applications and covers reflection and dynamic code loading mechanisms.
+
+Static analysis and dynamic analysis have also been applied simultaneously to build on the strengths of both approaches
+Spreitzenbarth et al.~\cite{spreitzenbarth_mobile-sandbox:_2013} created Mobile-Sandbox, a framework that relies on static analysis to the execution of dynamic analysis and find native codes in Android applications.
+Lindorfer et al.~\cite{lindorfer_andrubis_2014} released Andrubis as a public online service that combines static and dynamic analysis to gather information from a dataset of 1,000,000 Android applications.
+
+Moreover, Tam et al.~\cite{tam_evolution_2017} performed a systematic literature review on the evolution of Android analysis techniques to discuss future research directions on this topic.
+\subsection{Malware classification}
+\subsubsection{Malware families}
+The evolution of unsupervised machine learning algorithms led to the development of new analysis techniques that can group similar malware samples into malware families.
+Bayer et al.~\cite{bayer_scalable_2009} proposed an automated clustering technique that finds malware families at scale, as their approach was able to process 75,000 samples in less than three hours.
+Ye et al.~\cite{ye_automatic_2010} developed a malware categorization system that combines hierarchical clustering and k-medoids algorithms to create malware family signatures.
+Wang et al.~\cite{wang_microsoft_2015} performed a state of the art classification of malware running on the Microsoft operating system with intensive feature engineering and gradient tree boosting (XGboost).
+
+Other authors refined machine learning based approaches to improve the performance of clustering algorithms.
+Jang et al.~\cite{jang_bitshred:_2011} created BitShed to boost the performance of malware clustering algorithms by hashing feature with a distributed execution framework.
+Hutchison et al.~\cite{hutchison_exploring_2013} explored a discriminatory feature approach to find the subset of features that best support a classification decision.
+\subsubsection{Malware classifiers}
+Over the years, the security community has built upon existing classification techniques and adapted their approach to the Android ecosystem.
+Zia et al.~\cite{zia_droidapiminer:_2013} created DroidAPIMiner to mine API level features and detect Android malware with a k-NN classifier.
+Dash et al.~\cite{dash_droidscribe:_2016} released DroidScribe, a system that inspects the state of a virtual machine running Android application and reconstructs inter-process communication to predict a malware family with support vector machine algorithms.
+Yuan et al.~\cite{yuan_droiddetector:_2016} combined features from static analysis and dynamic analysis with deep learning to build DroidDetector and classify Android applications with high accuracy.
+Mariconti et al.~\cite{mariconti_mamadroid:_2017} made MaMaDroid, a tool that incorporates application behaviors from a sequence of abstracted API calls into a Markov chain to detect Android malware.
+
+The continuous growth of malicious Android applications also contributed to the creation of ranking systems able to prioritize the classification and the analysis of malware.
+Chakradeo et al.~\cite{chakradeo_mast:_2013} proposed MAST to triage Android applications before their inspection by security analysts and other resource intensive analysis systems.
+Lindofer et al.~\cite{lindorfer_marvin:_2015} designed a system called MARVIN that combines static and dynamic analysis to compute a malice score that indicates the risk associated with an Android application.
+
+In response to the use of obfuscation techniques by malware authors, research groups continued to develop more robust and accurate classifiers to prevent the propagation of malware.
+Gascon et al.~\cite{gascon_structural_2013} explored the recent use of machine learning classification to detect Android malware based on an efficient embedding of function call graphs.
+Kutylowsi et al.~\cite{kutylowski_droidminer:_2014} released DroidMiner to abstract program logic in threat modalities and suggest malicious behavioral patterns associated with malware families.
+Suarez-Tangil et al.~\cite{suarez-tangil_droidsieve:_2017} worked on the problem of obfuscated Android malware and created DroidSieve, a system that can detect malicious applications and classify them into malware families with obfuscation invariant features.
+Nix et al.~\cite{nix_classification_2017} investigated the performance of recurrent neural network and system call sequences to classify Android applications into malware families.
+Garcia et al.~\cite{garcia_lightweight_2018} built RevealDroid to classify Android malware based on their API usage and from the features found in native binaries inside Android applications.
+
+As an alternative to market-based solutions, other authors proposed to execute detection systems directly on user devices.
+Arp et al.~\cite{arp_drebin:_2014} released DREBIN, a state of the art detection and classification approach that combines a lightweight method for detecting malicious applications directly on the user smartphone and an interpretation of the decision suggested by the classifier.
+Saracino et al.~\cite{saracino_madam:_2016} created MADAM, a host-based malware detection system that compiles information about kernels, applications, users and packages on the device to detect malicious applications.
+\section{Creation of malware ground truth}
+Ground truth datasets are essential to detect malicious patterns and analyze malware samples.
+However, despite their importance, few malware sets are thoroughly qualified by the research community as research groups do not have access to a public source of information to understand the classification of Android malware.
+Moreover, the research community also suffers from the lack of human resources as research groups can not investigate malicious behaviors from scratch either on large sets of applications and over a long period.
+In this context, antivirus products appear to be the only source of truth that can be leveraged to perform experiments on Android malware.
+
+In the first part of this section, we review studies of antivirus decisions and the implication of using these antivirus systems in research experiments.
+
+In the second part of this section, we list malware datasets currently used by the research community to design experiments based on Android applications.
+\subsection{Study of antivirus results}
+\subsubsection{Antivirus decisions}
+A handful of research authors studied the challenge of integrating antivirus results in research experiments.
+Bureau et al.~\cite{bureau_dose_2008} discussed that the exponential growth of malware samples impairs both our ability to cross-reference malicious behaviors and to design tailored solutions.
+Kelchner et al.~\cite{kelchner_consistent_2010} reviewed the problem of consistent naming in antivirus engines and suggested that generic detection based on malware behavior will become the norm in the future.
+Gashi et al.~\cite{gashi_study_2013} studied the relationship between antivirus regressions and label changes to highlight the difference between antivirus systems.
+Kantchelian et al.~\cite{kantchelian_better_2015} also explained that the rapid development of malware variants forces the community to collect malware samples through generic techniques that do not thoroughly validate malicious behaviors they exposed.
+
+Other studies empathized the need to design better research experiments based on antivirus results.
+Li et al.~\cite{li_challenges_2010} argued that ground truth datasets obtained from a single antivirus could implicitly remove the most difficult cases for malware classifiers.
+Perdisci et al.~\cite{perdisci_vamo:_2012} created VAMO as both an alternative to majority-based voting and as a way for malware analysts to measure the quality of malware clustering results.
+Mohaisen \& Alrawi~\cite{hutchison_av-meter:_2014} proposed four metrics to assess the performance of antivirus scanners.
+The authors also recommended combining multiple antivirus engines to obtain detections of malicious applications that are both complete and correct.
+Allix et al.~\cite{allix_machine_2014} studied the importance of time in the construction of malware datasets to avoid data leakage in research experiments and better recognize malware lineages.
+
+With STASE, we proposed a complementary solution to build better malware ground truth.
+STASE metrics quantify essentials properties of malware sets and are independent of the number of samples included in malware datasets.
+Thus, STASE can be used to compare ground truth datasets at a coarse grain level and spot potential biases introduced by label inconsistencies or generic decisions in antivirus results.
+\subsubsection{Antivirus labels}
+Research groups have discussed the importance of creating a standard malware labeling scheme to consolidate the output of antivirus systems.
+Bontchev et al.~\cite{bontchev_current_2005} engaged in the maintenance of CARO~\cite{skulason_caro_nodate}, a malware naming scheme developed in 1990 to report the result of antivirus products.
+Harley et al.~\cite{harley_game_2009} spoke about the limits of malware naming as the complexity of malicious applications makes precise identification a challenge for the antivirus industry.
+Maggi et al.~\cite{jajodia_finding_2011} developed a graph-based approach to quantify the degree of inconsistency between antivirus vendors and reported that current naming models are both syntactically and semantically incoherent.
+Gregio et al.~\cite{gregio_toward_2015} surveyed existing malware naming schemes and introduced a new convention to provide supplementary information to complement existing approaches.
+
+Other research groups addressed the problem of label inconsistencies with external solutions.
+Wang et al.~\cite{wang_rebuilding_2014} created Latin, a first attempt to reconcile both syntactic and semantic naming discrepancies at a large scale based on malware encyclopedia and antivirus reports.
+Sebastián et al.~\cite{monrose_avclass:_2016} proposed AVCLASS as an improvement over Latin to cluster malware labels based on existing malware ground truth such as malware family names and vendor-specific rules.
+
+Similar to Latin and AVCLASS, the goal of our approach with EUPHONY is to assist practitioners in the creation of reference datasets from antivirus results.
+However, EUPHONY does not require a ground truth list of malware families to distinguish between family names from generic tokens.
+Moreover, EUPHONY does not contain vendor-specific rules similar to AVCLASS that remove label suffixes.
+As the accuracy of AVCLASS and EUPHONY are on the same order of magnitude, we think that the learning mechanisms of EUPHONY are more sustainable in practice to both bootstrap and generalize the unification of malware labels over a broad set of unknown samples.
+\subsection{Datasets of Android malware}
+Ground truth datasets are essential for developing new approaches against Android malware.
+On the one hand, malware datasets provide a source of samples to support the creation of detection patterns.
+On the other hand, a malware ground truth is mandatory to validate the methodology proposed by other researchers.
+Moreover, ground truth datasets are one of the first resources that security practitioners must acquire to run experiments on Android malware.
+
+This section enumerates ground truth datasets used in the research literature.
+
+The first part of this section reports the datasets created by academic actors.
+
+The second part of this section presents solutions proposed by industrial actors.
+\subsubsection{Research projects}
+The two most cited work on Android malware relates to the creation of malware datasets.
+Zhou et al.~\cite{zhou_dissecting_2012} created the Genome dataset with malware samples gathered from August 2010 to October 2011.
+The Genome project contains 1,260 malware samples divided into 49 families that were analyzed manually by the authors.
+The paper reports the installation method, the activation mechanism in addition to the actions that the malware performs and the permissions that the application requires.
+Arp et al.~\cite{arp_drebin:_2014} extended the Genome project to create Drebin, a detection system created from a dataset of 5,560 malware samples.
+Compared to Genome, malware families were inferred with machine learning algorithms and divided into 178 malware families.
+
+As Genome and Drebin projects became more and more obsolete over the years~\cite{wei_deep_2017}, other research groups proposed new datasets with up to date samples and additional features.
+Allix et al.~\cite{allix_androzoo:_2016} developed Androzoo, a collection of 8 million Android applications collected from Google Play and alternative markets to engage the research community in reproducible experiments.
+Kiss et al.~\cite{kiss_kharon_2016} started the Kharon dataset to further document Android malware with manual execution traces about files, processes, and network sockets.
+Wei et al.~\cite{wei_deep_2017} released the Android Malware Dataset (AMD) from samples gathered between 2010 and 2016.
+AMD contains 24,650 samples divided into 71 families that were analyzed manually at a small scale.
+The authors of AMD then used the knowledge gathered from manual inspection to find similar samples in their set thanks to clustering algorithms.
+\subsubsection{Industry projects}
+Industrial actors started their initiative to share information about malware threats that target the Android ecosystem.
+Contagio~\cite{parkour_contagio_nodate} is a public dataset of Android malware created in 2011 that allows its contributors to download and upload suspicious samples with a simple service.
+Koodous~\cite{ramirez_koodous_nodate} is a collaborative effort to vet Android malware at scale based on a rich threat exchange platform created by a handful of engineers.
+
+Other industrial actors contributed to the development of malware databases outside the Android community.
+Malpedia~\cite{plohmann_malpedia_nodate} is an online service that provides a fast and transparent solution to comment on malware families.
+MISP~\cite{circl_misp_nodate} is an open source threat intelligence sharing platform that provides indicators of compromises in a structured and automated manner.
+\section{Explanation of black box systems}
+The use of machine learning algorithms for automating the classification of malicious applications helped the security community in its arms race against Android malware.
+However, the predictions returned by complex statistical models cannot be explained to human operators, as these models do not provide a high-level representation of their decision boundary.
+Therefore, machine learning models cannot be leveraged in their current state to explain the ground truth behavior of Android malware.
+To appreciate the impact that machine learning algorithms have on Android security, we must review the approaches developed by the artificial intelligence community to bridge the gap between model accuracy and model interpretability.
+
+Similarly, Android applications can also be considered as black box systems by security analysts when operators do not have access to the source code.
+Obfuscation techniques deployed by malware authors can also limit our ability to inspect software artifacts with static and dynamic analysis techniques altogether.
+As the comprehension of malicious code is critical to understand what a malicious application can do, we must review the motivation and the techniques for describing Android families based on large sets of malware.
+
+In the first part of this section, we present the problem of interpreting statistical models and the solutions developed to explain the output of machine learning algorithms.
+
+In the second part of this section, we focus our attention on explaining the behavior of Android malware and on the approaches proposed by the research community to dissect malware families.
+\subsection{Machine learning models}
+\subsubsection{Model interpretation}
+The first step towards model interpretation was to explain the tension that happens between model accuracy and model interpretability.
+Lipton et al.~\cite{lipton_mythos_2018} discussed the desirability and the feasibility of model interpretation regarding existing machine learning algorithms.
+Doshi-Velez et al.~\cite{doshi-velez_towards_2017} worked to rigorously define the notion of model interpretability and describe in which circumstances this property is desirable.
+Murdoch et al.~\cite{murdoch_interpretable_2019} created a framework called Predictive, Descriptive, Relevant (PDR) to evaluate and understand model interpretation proposed by other authors.
+
+As the demand for better model explainability strives, other research groups worked on a new topic called Explainable Artificial Intelligence (XAI).
+Gunning et al.~\cite{gunning_explainable_2017} introduced an explainable artificial intelligence program at DARPA to produce more transparent models and enable human experts to understand their output.
+Adadi et al.~\cite{adadi_peeking_2018} and Dosilovic et al.~\cite{dosilovic_explainable_2018} both presented a survey of the field of explainable artificial intelligence to review existing approaches and discuss future research directions.
+\subsubsection{Model exploitation}
+Conscious of the danger posed by black box statistical models, authors attempted to exploit the weaknesses of machine learning algorithms and yield incorrect predictions.
+Papernot et al.~\cite{papernot_practical_2016} created a practical demonstration where the authors took control of a remotely hosted neural network by implementing a local model that substitutes the output classes of the target network.
+Tramer et al.~\cite{tramer_ensemble_2017} crafted perturbations with fast single step methods to both validate their influence on black box exploits and craft models that more robust to this kind of attack.
+
+To improve the trust in machine learning algorithms, researchers proposed to explain the output of complex statistical models with approximation techniques.
+Ribeiro et al.~\cite{ribeiro_why_2016} released LIME, a tool that creates a local approximation around a given prediction for any machine learning model.
+Lundberg et al.~\cite{lundberg_unified_2017} proposed SHAP, a framework that interprets statistical models by assigning an importance value to the features involved in a particular prediction.
+Shrikumar et al.~\cite{shrikumar_learning_2017} presented DeepLIFT, a method for decomposing the prediction of neural networks by back propagating the importance of each neuron to the input layer.
+\subsection{Malicious Android applications}
+\subsubsection{Malware comprehension}
+Some research groups pointed out that the comprehension of malware is crucial to the adoption of automated approaches out of the lab.
+Sommer \& Paxson~\cite{sommer_outside_2010} observed that machine learning algorithms are rarely used in a real-world scenario, as the task of finding security attacks is fundamentally different from other application domains.
+Rossow et al.~\cite{rossow_prudent_2012} analyzed the methodology of 36 research papers related to malware research and identified several shortcomings in malware description and experimental settings.
+Allix et al.~\cite{allix_empirical_2016} considered the results of machine learning classifiers applied in the lab against the performance of the same classifiers in the wild and observed a significant drop of F-measures in the latter setting.
+Canto et al.~\cite{canto_large_2017} mentioned that access to an unbiased and representative source of malicious samples is crucial to ensure the accuracy and the realism of security protections.
+
+Other authors aimed at monitoring the evolution of malware artifacts over time to observe trends in malware developments and tailor their protection systems.
+Lindorfer et al.\cite{lindorfer_lines_2012} created BEAGLE, a tool that associates and tracks dynamic behaviors from malicious codes over time to monitor the evolution of 16 malware families.
+Suarez-Tangil et al.~\cite{suarez-tangil_eight_2018} studied the evolution of 1.2 million Android malware over eight years to study the behavior of repackaged applications.
+\subsubsection{Malware dissection}
+Recent advancements in machine learning based approaches enabled the research community to create meaningful descriptions that support the predictions of their statistical models.
+Arp et al.~\cite{arp_drebin:_2014} pioneered this approach on the Android ecosystem with Drebin, which proposed to weight the features that contribute the most to the prediction of a linear SVM model.
+Jang et al.~\cite{jang_detecting_2016} introduced a different approach with Andro-profile, a hybrid profiling engine that extracts system logs information and generates human-readable descriptions.
+
+The work on benign applications repackaged with malicious components (i.e., piggybacked malware) revealed that the construction of malware could be exploited to reverse their creation process.
+Zhou et al.~\cite{zhou_fast_2013} developed a fingerprinting technique from semantic features to reveal piggybacked applications found on application markets in linearithmic time complexity.
+Allix et al.~\cite{allix_forensic_2014} observed noteworthy patterns in the criminal industry that lead to artifact leakages thanks to a weak comprehension of Android security measures by malware authors.
+Li et al.~\cite{li_understanding_2017} investigated the use of Android packaging models by malware writers to mass produce Android malware with simple automated techniques that rely on code library.
+Fan et al.~\cite{fan_dapasa:_2017} created DAPASA, an approach that detects piggybacked malware with sensitive sub-graph analysis to profile the most suspicious components of an application.
+Wermke et al.~\cite{wermke_large_2018} investigated the use of obfuscation and found that only 25\% applications out of 1.7 million applications were obfuscated, preventing the protection of Android applications against piggybacking.
+
+With AP-GRAPH, we propose to complement machine learning based approaches by introducing a data mining method that identifies the most specific artifacts of malware families.
+Contrary to statistical models, AP-GRAPH focuses on the most discriminative artifacts to ensure that one and only one artifact informs about a malware family during the ranking process.
+The main benefit that AP-GRAPH provides to the security community is to propose a list of critical features that can be tracked over time or be used as entry points to bootstrap a security analysis.
+Moreover, our approach supports the creation of descriptive malware ground truth from large sample sets, as AP-GRAPH can select artifacts highly correlated with the presence of malware families.
+We think that this work is the first step towards a clear and unambiguous answer to what are malicious applications and which artifacts are the root cause of their malicious behaviors.

@@ -1,0 +1,112 @@
+\chapter{Conclusion}
+\label{chapter:conclusion}
+
+\begin{quote}
+{\itshape
+This chapter proposes a conclusion on the creation of malware ground truth.
+
+The first section outlines our contributions to create better malware ground truth.
+
+The second section suggests research directions to further improve malware datasets.
+}
+\end{quote}
+
+\localtableofcontents{}
+
+\section{Summary}
+\subsection{Definition of Android malware}
+As explained in Chapter~\ref{chapter:introduction}, security practitioners must have a clear and unambiguous definition of Android malware to detect malicious applications before they impact Android users~\cite{sommer_outside_2010,rossow_prudent_2012}.
+While previous research groups worked with a partial~\cite{arp_drebin:_2014} or obsolete~\cite{zhou_dissecting_2012} definition of malware to support their approach, the current state of the Android security ecosystem\cite{google_android_2018} imposes more transparency on the representativeness of malware samples~\cite{canto_large_2017} and the results of machine learning experiments~\cite{allix_empirical_2016}.
+
+In Chapter~\ref{chapter:stase}, we proposed to evaluate the property of popular malware sets to observe their structure from a high-level perspective with STASE.
+Moreover, we formulated some recommendations about the desirable properties of malware ground truth to avoid the introduction of biases in experimental settings.
+As malware datasets are the primary source of what defines Android malware, our framework provides the railroads to prevent drifts in malware definitions across machine learning experiments.
+
+In Chapter~\ref{chapter:euphony}, we built a solution named EUPHONY to retrieve valuable tokens from antivirus reports and better qualify Android malware datasets in the large.
+Since the security industry is one of the only actors with enough human resources to systematically analyze new malware breeds, the extraction and the unification of antivirus results is an essential step towards the exploration similarities between malicious samples.
+EUPHONY can help practitioners in this regard by parsing the results of antivirus reports to eliminate naming confusion and propose a single definition through a majority voting scheme.
+
+In Chapter~\ref{chapter:apgraph}, we investigated the relation between malicious artifacts and malware families with AP-GRAPH to uncover suspicious elements contained in Android applications.
+We based our approach on previous studies that showed~\cite{allix_forensic_2014,li_understanding_2017} that the expression of malicious behaviors is supported by the presence of artifacts controlled by malware authors.
+AP-GRAPH can assist the description of malware families and Android malware in general by retrieving a list of artifacts related directly or indirectly to malicious behaviors found in Android applications.
+
+Despite the solutions we proposed, our contributions do not provide a definitive definition for Android malware.
+On the one hand, malware families suggested by EUPHONY depend on the quality of antivirus results.
+Thus, the quality of the proposed names has an upper limit based on a black box labeling system.
+On the other hand, the artifacts retrieved by AP-GRAPH are analyzed from the output of antivirus systems and share the same limitation than EUPHONY.
+While our work attempted to address short term needs of the security community, we think that the quest for better malware definitions remains.
+This challenge might be addressed with the creation of white box systems to provide alternative results based on transparent approaches.
+\subsection{Automation of security decisions}
+In Chapter~\ref{chapter:introduction}, we pointed out that both the lack of security experts~\cite{ics2_cybersecurity_2018} and the use of automation techniques by malware authors~\cite{av-test_malware_2019} threaten the current balance between security defenders and attackers.
+To address these shortcomings, the security community must rely more and more on automated solutions on its own to keep pace with the proliferation of malware.
+With recent advancements in machine learning based systems, our community might improve our ability to prevent the surge of malicious applications that target Android markets.
+To support these algorithms, we reviewed several research contributions in this dissertation.
+
+With STASE in Chapter~\ref{chapter:stase}, we proposed a set of metrics that can be integrated into machine learning pipelines to vet the properties of large malware datasets automatically.
+For instance, we saw in this chapter that different experimental settings could influence the distribution of output classes adopted to train statistical models.
+In place of careful manual reviews performed by security practitioners, STASE metrics can be used to track down biases and improve the confidence in machine learning based approaches.
+
+With EUPHONY in Chapter~\ref{chapter:euphony}, we created a fully automated solution to parse antivirus labels and suggest meaningful clusters of names based on the co-occurrence of names in malware reports.
+Thanks to the knowledge database integrated into our solution, EUPHONY can remember past associations and improve its suggestion over time as the research community discovers new malware names.
+Compared to existing solutions~\cite{monrose_avclass:_2016}, EUPHONY can bootstrap its learning process without an extensive list of generic tokens or malware family names.
+
+With AP-GRAPH in Chapter~\ref{chapter:apgraph}, we implemented a large scale data mining solution to analyze artifacts associated with popular malware families automatically.
+Our experiments showed that AP-GRAPH was able to retrieve a broad set of artifacts related to malicious behaviors found in Android malware.
+Moreover, the indexing and querying scheme of AP-GRAPH can be applied to provide a higher level analysis framework over common malware datasets to further automate security decisions.
+
+While parts of our protection against Android malware can be automated, our contributions merely focused on the creation of better malware ground truth.
+Indeed, automated decision algorithms are always at risk at proposing an output that does not reflect the reality in the field if they are not adequately vetted or if their input is not representative of the population~\cite{sommer_outside_2010,rossow_prudent_2012,allix_empirical_2016}.
+We expect that quality metrics such as STASE and automatic tagging systems like EUPHONY and AP-GRAPH can assist practitioners in the construction of more sophisticated security solutions.
+\subsection{Progression of human comprehension}
+We recognized in Chapter~\ref{chapter:introduction} that Android malware fall under the curse of dimensionality~\cite{bellman_dynamic_2013} as the sheer size of information contained in a standard application is too difficult to apprehend for human experts.
+Even if automated solutions can handle security decisions at large scale, we postulate that human analysts must comprehend malware more easily to craft more creative approaches against Android malware.
+The techniques we proposed take this point into consideration to assist the tasks of security analysts.
+
+The metrics proposed by STASE in Chapter~\ref{chapter:stase} were designed to be comprehensible by human operators and provide an overview of malware ground truths.
+STASE metrics proposed a human-readable interpretation of malware datasets, as the results we report are size independent and with a clear explanation for the extreme and intermediate values.
+Thus, the solution we propose can be embedded in a dashboard system or a monitoring solution to help experts navigate the complexity of their malware landscape.
+
+The output produced by EUPHONY in Chapter~\ref{chapter:euphony} can be leveraged by a security analyst to comprehend the structure of malware labels and explore the relationship between security decisions.
+Since EUPHONY relies on classical search algorithms and graph data structures, the analysis steps can be decomposed to track down the advancement progress and report intermediate results.
+Moreover, the knowledge base instantiated by EUPHONY can be audited by external experts to ensure that the decisions we suggest are in line with the expectations of the analysts.
+
+The artifacts proposed by AP-GRAPH in Chapter~\ref{chapter:apgraph} can served security experts on two fronts.
+On the one hand, AP-GRAPH artifacts describe key features associated with malware families to get an initial idea of the behavior of a malware group.
+On the other hand, AP-GRAPH enumerates potential entry points for reverse engineers to start their analysis process based on malware components that were not seen in other malware families.
+
+However, Android malware are probably one of the most complex pieces of software handled by humans analysts.
+Several limitations, such as our reliance on noisy labeling systems and the use of obfuscation by malware authors might impact the performance of the approaches we proposed.
+To overcome these shortcomings in the short term, we designed our solutions to be transparent for human operators starting from the processing of raw data to the delivery of the final results.
+\section{Future research directions}
+\subsection{Malware forecast}
+In Chapter~\ref{chapter:apgraph}, we explored the relationship between Android artifacts and malware families with AP-GRAPH to extract the characteristics of popular malware variants.
+However, as malware authors continue to develop new features and introduce new malware breeds, it is crucial for our community to keep track of these changes and react efficiently according to the current malware landscape.
+On the one hand, a tracking solution would allow security analysts to adapt our security infrastructure based on the most recent trends in malware development.
+On the other hand, the monitoring of artifacts would allow a proportionate response to malware threats, allowing the allocation of more resources when the complexity or the number of variants arise.
+
+Our time analysis of malware artifacts is a small step toward a global indicator that could serve as a malware forecast system.
+Instead of focusing on the top malware variants, the artifacts uncovered by AP-GRAPH could be applied to the creation of new metrics that track changes in the composition of Android malware.
+For instance, the absence of a known artifact inside a malware family could indicate that the artifacts were updated or replaced by a new one.
+A surge of some malicious artifacts commonly associated with a malware family could also indicate either the resurgence of a known malware family or deployment of a brand new variant.
+In both cases, adding the dimension of time into the distribution of malicious artifacts would be a valuable asset to support better and more efficient security responses.
+\subsection{Apprenticeship learning}
+Through this dissertation, we took the postulate that antivirus labels are a trustworthy source of information that can be mined and analyzed to leverage the efforts of industrial security actors.
+However, our analysis and experience revealed that antivirus reports could return noisy results that do not fully support the confidence we expect in state of the art security solutions.
+While the information we gathered with EUPHONY and AP-GRAPH can be viewed as a partial reference of the decision rules built in antivirus products, our approaches do not provide a complete alternative to black box classifiers yet.
+
+In the long term, the security community might benefit from building its own decision rules and share them publicly to create even better malware ground truths.
+As manual inspections require too much effort for a small community, a new type of artificial intelligence techniques must be explored to augment the performance of human analysts~\cite{veeramachaneni_ai2:_2016}.
+A possible solution might be the use of apprenticeship learning~\cite{abbeel_apprenticeship_2004}, a kind of inverse reinforcement learning algorithms that derives a reward function from the decision of human experts.
+For instance, a security analyst could create a script that extracts suspicious artifacts within Android applications and concludes about the nature of an application based on a weighted formula.
+Similarly, the analyst actions could be learned and applied by an algorithm that reproduces the expert steps while a machine learning model could emulate the expert formula.
+Moreover, reinforcement learning algorithms would provide an efficient framework of analysis to avoid the systematic inspection of the numerous parts that composed an Android application.
+The main benefit of an apprenticeship learning based approach in this context would be to support the creative work of security analysts while automating their most tedious tasks as we face a shortage of security experts~\cite{ics2_cybersecurity_2018}.
+\subsection{Learning from machine learning}
+We envision that the field of artificial intelligence will remain more art than science as long as experts in the domain are not able to theorize the performance of machine learning algorithms~\cite{tramer_ensemble_2017,lipton_mythos_2018}.
+This problem will also impact the detection of Android malware, as our community operates in an adversarial setting where a single model can be potentially exploited as a single point of failure~\cite{sommer_outside_2010,rossow_prudent_2012,papernot_practical_2016}.
+To improve the robustness of our solutions, the security community must engage in the reproduction and the comparison of machine learning based models to understand their weaknesses but also to compensate for their inherent limitations.
+
+A possible solution might be the creation of meta machine learning systems, able to recommend the best set of models for a given operational setting.
+For example, malware created more than one year ago could be better handled by an older model while new variants would require more advanced models instead.
+Similarly, some malware families may be better detected with statistical models created from dynamic features while other families would be handled more efficiently by a simpler model.
+Learning from the output of existing machine learning algorithms could improve the diffusion of research approaches outside of the lab and support the development of a new generation of hierarchical machine learning pipelines.

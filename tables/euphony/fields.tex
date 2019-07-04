@@ -1,0 +1,22 @@
+\begin{table}[!ht]
+    \centering
+    \caption{Examples of antivirus labeling patterns}
+    \resizebox{0.85\linewidth}{!}{
+        \begin{tabular}{|c|c|cccc|}
+            \hline
+            \textbf{Label}               & \textbf{AV Pattern}                       & \textbf{Family} & \textbf{Type} & \textbf{Plat.} & \textbf{Info} \\
+            \hline
+            Android.Trojan.Adrd & <plat>.<type>.<name> & adrd         & trojan     & android        & --           \\
+            \hline
+            Trojan:/Adrd.b  &	<type>:/<name>.<info>       & adrd         & trojan     & --      & b            \\
+            \hline
+            Android:PjApps [Trj]    & <plat>:<name> [<type>]      & pjapps       & trj        & android        & --           \\
+            \hline
+            Troj.PjApps (kcloud)    & <type>.<name> (<info>)          & pjapps       & troj       & --             & kcloud      \\
+            \hline
+            Android/Adrd.5e2f & <plat>/<name>.<info>        & adrd         & --    & android        & 5e2f        \\
+            \bottomrule
+        \end{tabular}
+    }
+    \label{table:euphony:fields}
+\end{table}

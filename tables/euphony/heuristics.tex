@@ -1,0 +1,22 @@
+\begin{table}[!ht]
+    \centering
+    \resizebox{0.7\linewidth}{!}{
+        \begin{tabular}{|p{0.5cm}|p{6cm}|p{3.75cm}|}
+            \hline
+            & \textbf{Property}                                                           &\textbf{Action}\\\hline
+            1  & Word is associated to a known field in the database                         & associate the same field \\\hline
+            2  & Word is suffixed by -ware                                                   & word is a type \\\hline
+            3  & Word is between parenthesis                                                 & word is an info \\\hline
+            4  & Word is between square brackets                                             & word is a type or info \\\hline
+            5  & Only one family, type and platform per label                                & enforce when field is found \\\hline
+            6  & Word is a synonym of a type or platform in the database (e.g.~troj, trojan) & associate the same field \\\hline
+            7  & Word is the last token not associated to a field                            & word is a family \\\hline
+            8  & Words are part of common word sentence                                      & words are info \\\hline
+            9  & Label is compatible with a pattern of the same AV                           & associate fields based on pattern \\\hline
+            10 & Given two remaining tokens, one is a common word and the other is not       & common word: information, other word: family \\
+            \bottomrule
+        \end{tabular}
+    }
+    \caption{Heuristics for mapping label words to fields}
+    \label{table:euphony:heuristics}
+\end{table}

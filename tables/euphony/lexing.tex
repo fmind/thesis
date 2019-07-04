@@ -1,0 +1,14 @@
+\begin{table}[!ht]
+\centering
+    \caption{Lexing rules of EUPHONY}
+    \resizebox{0.5\linewidth}{!}{
+        \begin{tabular}{lcl}
+            \textit{<family>} &::=& [:alpha:]\{3,\} \\
+            \textit{<type>} &::=& [:alpha:]\{2,\} \\
+            \textit{<info>}&::=& [:alnum:]+ \\
+            \textit{<plat>} &::=& [:alnum:]\{2,\} \\
+            \textit{<sep>} &::=& ([:punct:] | [:blank:])+
+        \end{tabular}
+    }
+    \label{table:euphony:lexing}
+\end{table}

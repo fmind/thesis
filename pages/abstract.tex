@@ -1,0 +1,23 @@
+\chapter*{Abstract}
+Mobile applications are essential for interacting with technology and other people.
+With more than 2 billion devices deployed all over the world, Android offers a thriving ecosystem by making accessible the work of thousands of developers on digital marketplaces such as Google Play.
+Nevertheless, the success of Android also exposes millions of users to malware authors who seek to siphon private information and hijack mobile devices for their benefits.
+
+To fight against the proliferation of Android malware, the security community embraced machine learning, a branch of artificial intelligence that powers a new generation of detection systems. 
+Machine learning algorithms, however, require a substantial number of qualified samples to learn the classification rules enforced by security experts.
+Unfortunately, malware ground truths are notoriously hard to construct due to the inherent complexity of Android applications and the global lack of public information about malware.
+In a context where both information and human resources are limited, the security community is in demand for new approaches to aid practitioners to accurately define Android malware, automate classification decisions, and improve the comprehension of Android malware.
+
+This dissertation proposes three solutions to assist with the creation of malware ground truths.
+
+The first contribution is STASE, an analytical framework that qualifies the composition of malware ground truths.
+STASE reviews the information shared by antivirus products with nine metrics in order to support the reproducibility of research experiments and detect potential biases.
+This dissertation reports the results of STASE against three typical settings and suggests additional recommendations for designing experiments based on Android malware.
+
+The second contribution is EUPHONY, a heuristic system built to unify family clusters belonging to malware ground truths.
+EUPHONY exploits the co-occurrence of malware labels obtained from antivirus reports to study the relationship between Android applications and proposes a single family name per sample for the sake of facilitating malware experiments.
+This dissertation evaluates EUPHONY on well-known malware ground truths to assess the precision of our approach and produce a large dataset of malware tags for the research community.
+
+The third contribution is AP-GRAPH, a knowledge database for dissecting the characteristics of malware ground truths.
+AP-GRAPH leverages the results of EUPHONY and static analysis to index artifacts that are highly correlated with malware activities and recommend the inspection of the most suspicious components.
+This dissertation explores the set of artifacts retrieved by AP-GRAPH from popular malware families to track down their correlation and their evolution compared to other malware populations.
